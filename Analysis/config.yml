@@ -1,0 +1,70 @@
+Network:
+  # Purpose of the machine [Web, File, FTP, PC]
+  Purpose: ['PC']
+  WhitelistPort: [22,23,3309]
+  # Number to consider the program as suspicious
+  MaxConnectionAsSuspicious: 15
+  # Number of the max connection to the same target (may be DoS)
+  MaxSameDestinationConnection: 8
+  # Number of ports that the process connect simultaneously (may be port scanning)
+  MaxPortSimultaneously: 5
+  # Number of the connection change, more than the number considered as suspicous 
+  MaxChange: 50
+  # Whitelist ports
+  Whitelist: []
+  # Custom blacklist website file Path
+  BlacklistFilePath: None
+  # Ports to marked suspicious (Connect and connected)
+  SuspiciousPorts: [139,445]
+  # Program to ignore (this would ignore unsigned program)
+  IgnoredProcess: ['test.exe','ping.exe']
+  # Ignore known bowsers or not (Signed browser)
+  IgnoredBrowsers: false
+  # Known browser list (The program still checks signature, if not signed, it won't be ignored)
+  KnownBrowser: ['iexplorer.exe','firefox.exe','safari.exe','chrome.exe']
+
+Process:
+  # Check only suspicious process from Network anatlysis
+  # If true, the program will only analyze the suspicious process from network analysis
+  # If false, the program will analyze all processes.
+  OnlySuspicious: false
+  # Max threads as suspicious
+  MaxThreadCount: 50
+  # Max fork children as suspicious
+  MaxChildrenCount: 3
+  # Check Parent Process
+  CheckParent: true 
+  # Known Parent Process {'Child': 'Parent'}
+  KnownParent: {'svchost.exe': 'services.exe', 'services.exe': wininit.exe, 'dwm.exe': 'svchost.exe'}
+  # Custom blacklist Path
+  BlacklistPath: None
+  # Custom blacklist hashes type
+  BlacklistHashType: MD5
+  # Recursively check child fork
+  CheckChildProcess: true
+  # Send TCP request counts as suspicious per second (including retransmission)
+  TCPRequestSend: 5
+  # Mark packed executable as suspicious
+  CheckPacked: true
+  # Mark processes that have no description and company as suspicious
+  CheckCompanyDescription: true
+  # Suspicious child process
+  SuspiciousChild: ['cmd.exe','powershell.exe', 'wscript.exe', 'bash.exe']
+  # Directory Type definition
+  SystemFolder: ["C:\\Windows\\"]
+  Installed: ["C:\\Program File\\"]
+  User: ["C:\\Users\\"]
+  # Suspicious folder under user folder
+  Temp: ["Appdata", "Temp"]
+
+Registry:
+  # Logon execute path
+  StartUp: "Microsoft\\Windows\\CurrentVersion\\Run"
+  # AppInit
+  AppInit: "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows"
+  # Autoruns category to check
+  CategoryToCheck: ["Hijacks"]
+
+Log:
+  # Log id to check
+  LogID: [1100, 1101, 1102, 4264, 4720, 7034, 7036, 7040]
